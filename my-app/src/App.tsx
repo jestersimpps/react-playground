@@ -1,11 +1,10 @@
 import './App.css';
 import React from "react"
-import { Component, FormEvent} from "react";
+import {Component, FormEvent} from "react";
+import Header from "./header/header";
 
-const logo = require("./logo.svg") as string;
 
-
-interface Item{
+interface Item {
     id: string;
     item: string;
 };
@@ -26,7 +25,7 @@ class App extends Component {
             })
     }
 
-    addItem = (e:  FormEvent<HTMLFormElement>) => {
+    addItem = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         fetch('http://localhost:4567/items.json', {
@@ -61,13 +60,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <nav className="navbar navbar-light bg-light">
-          <span className="navbar-brand mb-0 h1">
-            <img src={logo} className="App-logo" alt="logo"/>
-            Todo List
-          </span>
-                </nav>
 
+                <Header/>
                 <div className="px-3 py-2">
 
                     <form className="form-inline my-3" onSubmit={this.addItem}>
