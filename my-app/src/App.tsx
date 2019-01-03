@@ -1,6 +1,14 @@
-import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from "react"
+import { Component, FormEvent} from "react";
+
+const logo = require("./logo.svg") as string;
+
+
+interface Item{
+    id: string;
+    item: string;
+};
 
 class App extends Component {
 
@@ -8,7 +16,7 @@ class App extends Component {
         items: [],
         loading: true,
         todoItem: ''
-    }
+    };
 
     componentDidMount() {
         fetch('http://localhost:4567/items.json')
@@ -18,8 +26,8 @@ class App extends Component {
             })
     }
 
-    addItem = (e) => {
-        e.preventDefault()
+    addItem = (e:  FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
         fetch('http://localhost:4567/items.json', {
             method: 'POST',
@@ -36,7 +44,7 @@ class App extends Component {
         this.setState({todoItem: ''})
     }
 
-    deleteItem = (itemId) => {
+    deleteItem = (itemId: string) => {
         fetch('http://localhost:4567/items.json', {
             method: 'DELETE',
             body: JSON.stringify({id: itemId}),
@@ -94,7 +102,7 @@ class App extends Component {
                         <table className="table table-striped">
                             <tbody>
                             {
-                                this.state.items.map((item, i) => {
+                                this.state.items.map((item: Item, i) => {
                                     return (
                                         <tr key={item.id} className="row">
                                             <td className="col-1">{i + 1}</td>
